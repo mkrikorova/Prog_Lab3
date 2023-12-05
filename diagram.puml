@@ -1,0 +1,200 @@
+@startuml
+
+enum Characteristic {
+    -{static}SHAPELESS
+    -{static}TORN
+    -{static}SOMEONE
+    --
+    -title : String
+    --
+    +getTitle()
+}
+
+interface ICook {
+    +bake(Oven oven, String product)
+    +stew(Oven oven, String product)
+    +fry(Oven oven, String product)
+}
+
+interface IDry {
+    +wet()
+    +dry()
+    +dryOn(Dryer place)
+}
+
+class Cloth {
+    -type : Characteristic
+    -rateSoak : double // 0 - сухой, 1 - мокрый
+    -dryerPlace : Dryer
+    --
+    + Cloth(double rateSoak)
+    ..
+    +setCharacteristic(Characteristic  characteristic)
+    +getCharacteristic() : Characteristic
+    +wet()
+    +dry()
+    +dryOn(Dryer place)
+}
+
+class Shorty {
+    -name : String
+    -age : int
+    -gender : boolean // 1 - жен, 0 - муж
+    +outfit[] : Cloth
+    -location : Room
+    -weight : double
+    --
+    +Shorty(String name, int age, boolean gender, double weight)
+    ..
+    +getName()
+    +setName()
+    +move(Room room)
+    +setLocation(Room room)
+    +putOnCloth(Cloth item)
+    +removeCloth(Cloth item)
+    +bake(String product)
+    +stew(String product)
+    +fry(String product)
+}
+
+class Room {
+    -name : String
+    -wall1 : Wall
+    -wall2 : Wall
+    -wall3 : Wall
+    -wall4 : Wall
+    -ceiling : Ceiling
+    -floor : Floor
+    -oven : Oven
+    -pipe : Dryer
+    -rope : Dryer
+    -oven : Oven
+    -volume : String
+    +visitors[] : Shorty
+    --
+    + Room (String name, String volume)
+    ..
+    +getName()
+    +setName()
+    +addVisitor(Shorty shorty)
+    +removeVisitor(Shorty shorty)
+    +countVisitors() : int
+    +getRoomFloor()
+    +getRoomCeiling()
+    +getRoomElements()
+}
+
+class Wall {
+    +shelves[] : Shelve
+    +bulbs[] : Bulb
+    --
+    +Wall()
+    ..
+    +addBulb(Bulb bulb)
+    +removeBulb(Bulb bulb)
+    +countBulb() : int
+    +addShelve(Shelve shelve)
+    +removeShelve(Shelve shelve)
+    +countShelve() : int
+    +addPeople(int index, Shorty shorty)
+    +getWall() :String
+}
+
+class Ceiling {
+    -height : String
+    -status : String  //насколько ему плохо
+    +bulbs[] : Bulb
+    --
+    +Ceiling(String height, String status)
+    ..
+    +addBulb(Bulb bulb)
+    +removeBulb(Bulb bulb)
+    +countBulb() : int
+    +getBulb (int index) : String
+}
+class Floor {
+    -material : String
+    --
+    +Floor(String material)
+    ..
+    +getMaterial() : String
+}
+class Shelve {
+    -material : String
+    -status : String
+    +people[] : Shorty
+    --
+    +Shelve(String material, String status)
+    ..
+    +addPeople(Shorty shorty)
+    +removePeople(Shorty shorty)
+    +countPeople()
+    +getPeople() : ArrayList
+    +getShelve() : String
+}
+
+class Oven {
+    -material : String
+    --
+    +Oven(String material)
+    ..
+    +getMaterial() : String
+}
+abstract Dryer {
+    -temperature : int
+    +clothes[] : Cloth
+    --
+    +Dryer(int temperature)
+    ..
+    +getTemperature() : String
+    +setTemperature(String temperature)
+    +addCloth(Cloth item)
+    +removeCloth(Cloth item)
+    +countCloth()
+    +getDryerType() : String
+}
+class Rope {
+    -length : int
+    -material : String
+    -temperature : int
+    --
+    +Rope(int temperature, String material, int thickness)
+    ..
+    +getRopeType() : String
+}
+class Pipe {
+    -material : String
+    -size : String
+    -temperature : int
+    +Pipe(String material, String size, int temperature)
+
+}
+
+class Bulb {
+    -brightness : String
+    --
+    +Bulb(String brightness)
+    ..
+    +getBrightness() : String
+}
+
+Cloth --> Characteristic
+
+ICook <|.. Shorty
+Room <-- Shorty
+Room *-- Ceiling
+Room *-- Wall
+Room *-- Floor
+Wall o-- Shelve
+Room o-- Oven
+Ceiling o-- Bulb
+Wall o-- Bulb
+Room o-- Dryer
+Dryer <|-- Pipe
+Dryer <|-- Rope
+
+Cloth --o Shorty
+
+IDry <|.. Cloth
+@enduml
+
