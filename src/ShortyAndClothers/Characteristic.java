@@ -1,3 +1,5 @@
+package ShortyAndClothers;
+
 public enum Characteristic {
     SHAPELESS ("бесформенный"),
     TORN ("изорванный"),

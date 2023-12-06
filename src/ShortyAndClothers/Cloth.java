@@ -1,4 +1,9 @@
-public class Cloth implements IDry{
+package ShortyAndClothers;
+
+import Inerfaces.IDry;
+import RoomAndAllInside.Dryer;
+
+public class Cloth implements IDry {
     private String type; // вид одежды (белье носок и тп)
     private Characteristic characteristic;
     private double rateSoak; // 0 - сухой, 1 - мокрый

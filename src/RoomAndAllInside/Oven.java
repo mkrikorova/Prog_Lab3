@@ -1,3 +1,5 @@
+package RoomAndAllInside;
+
 public class Oven {
     private String material;
     public Oven(String material) {

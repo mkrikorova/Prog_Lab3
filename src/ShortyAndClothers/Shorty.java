@@ -1,9 +1,12 @@
-import java.util.ArrayList;
-import java.util.Objects;
+package ShortyAndClothers;
 
+import Inerfaces.ICook;
+import RoomAndAllInside.Room;
+
+import java.util.ArrayList;
 import static java.lang.Math.*;
 
-public class Shorty implements ICook{
+public class Shorty implements ICook {
     private String name;
     private int age;
     private boolean gender;// 1 - жен, 0 - муж
@@ -26,6 +29,7 @@ public class Shorty implements ICook{
     }
     public void move(Room room) {
         this.location = room;
+        room.addVisitor(this);
     }
 
     public void setLocation(Room room) {

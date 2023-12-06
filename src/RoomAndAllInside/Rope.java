@@ -1,4 +1,8 @@
-public class Rope extends Dryer{
+package RoomAndAllInside;
+
+import RoomAndAllInside.Dryer;
+
+public class Rope extends Dryer {
 
     private int length;
     private String material;

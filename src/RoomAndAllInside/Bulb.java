@@ -1,3 +1,5 @@
+package RoomAndAllInside;
+
 public class Bulb {
     private String brightness;
     public Bulb(String brightness) {

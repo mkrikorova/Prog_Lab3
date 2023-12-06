@@ -1,3 +1,6 @@
+package RoomAndAllInside;
+import ShortyAndClothers.*;
+
 import java.util.ArrayList;
 
 public class Shelve {

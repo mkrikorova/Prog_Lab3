@@ -1,3 +1,6 @@
+package RoomAndAllInside;
+import ShortyAndClothers.*;
+
 import java.util.ArrayList;
 
 public class Room {
@@ -23,18 +26,35 @@ public class Room {
         wall4 = new Wall();
         ceiling = new Ceiling(170, "закопченный");
         floor = new Floor("бетонный");
-        pipe = new Pipe("жестяная", "длинная", 85);
-        rope = new Rope(200, "бечевка", 27);
-        oven = new Oven("чугунная");
 
         //System.out.println("создалась комната " + this.name);
     }
+
+    public Room (String name, String volume, ArrayList<Shorty> nowVisitors) {
+        this.name = name;
+        this.volume = volume;
+        wall1 = new Wall();
+        wall2 = new Wall();
+        wall3 = new Wall();
+        wall4 = new Wall();
+        ceiling = new Ceiling(170, "закопченный");
+        floor = new Floor("бетонный");
+        for (Shorty shorty : nowVisitors) {
+            this.addVisitor(shorty);
+            System.out.println(shorty.getName() + " был в комнате");
+        }
+
+        //System.out.println("создалась комната " + this.name);
+    }
+
     public String getName() {
         return this.name;
     }
     public void setName(String newName) {
         this.name = newName;
     }
+
+
     public void addVisitor(Shorty shorty) {
         visitors.add(shorty);
         System.out.println(shorty.getName()+" вошел в " + this.name);
@@ -46,6 +66,17 @@ public class Room {
     public int countVisitors() {
         return visitors.size();
     }
+
+    public void addPipe(String material, String size, int temperature) {
+        pipe = new Pipe(material, size, temperature);
+    }
+    public void addRope(int length, String material, int temperature) {
+        rope = new Rope(length, material, temperature);
+    }
+    public void addOven(String material) {
+        oven = new Oven(material);
+    }
+
     public void getRoomFloor() {
         System.out.println(this.floor.getMaterial());
     }
@@ -55,13 +86,13 @@ public class Room {
     public void getRoomCeiling() {
         System.out.println("потолок был " + this.ceiling.getCeiling());
     }
-    public void addPeople(int number, Shorty shorty) {
-        this.wall1.shelves.get(number).addPeople(shorty);
-    }
+
     public void getRoomElements() {
         System.out.println(this.wall1.getWall());
         System.out.printf("в " + this.name + " были " + this.oven.getMaterial() + " печь с " + this.pipe.getDryerType() + " труба, ");
         System.out.println("на потолке висела " + this.ceiling.getBulb(0) + " лампочка");}
+
+
 
     public class Wall {
         ArrayList<Shelve> shelves = new ArrayList<Shelve>();

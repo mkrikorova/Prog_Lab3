@@ -1,3 +1,5 @@
+package RoomAndAllInside;
+import ShortyAndClothers.*;
 import java.util.ArrayList;
 
 abstract public class Dryer {
