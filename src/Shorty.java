@@ -84,6 +84,6 @@ public class Shorty implements ICook{
     }
     @Override
     public int hashCode(){
-        return (int)(this.name.hashCode() + this.age + ceil(this.weight));
+        return (int)(ceil(this.weight) * 20 + 4098);
     }
 }
