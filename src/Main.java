@@ -29,5 +29,7 @@ public class Main {
         Cloth boots = new Cloth("ботинки", 1);
         boots.setCharacteristic(Characteristic.SOMEONE);
         boots.dryOn(room.getRoomPipe());
+
+        //System.out.println(room.getRoomPipe().getClass()); // те выводит именно то, что написано после слово new ????
     }
 }
