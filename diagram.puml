@@ -22,6 +22,15 @@ interface IDry {
     +dryOn(Dryer place)
 }
 
+interface IWalk {
+    +streetWalk()
+}
+note top of IWalk
+   Это для анонимного класса
+   вызывается из main, чтобы
+   коротышки ходили по улице
+end note
+
 class Cloth {
     -type : Characteristic
     -rateSoak : double // 0 - сухой, 1 - мокрый
@@ -43,8 +52,12 @@ class Shorty {
     +outfit[] : Cloth
     -location : Room
     -weight : double
+
+    -sleepingMode : boolean // 0 - спит, 1 - бодрствует
+    -health : String // самочувствие
     --
     +Shorty(String name, int age, boolean gender, double weight)
+    +Shorty(String name, int age, boolean gender, double weight, String health)
     ..
     +getName()
     +setName()
@@ -55,6 +68,13 @@ class Shorty {
     +bake(String product)
     +stew(String product)
     +fry(String product)
+
+    +lieDown(Shelve shelve)
+    +standUp(Shelve shelve)
+    +fallAsleep()
+    +wakeUp()
+    +setHealth(String health)
+    +getHealth() : String
 }
 
 class Room {
@@ -65,7 +85,6 @@ class Room {
     -wall4 : Wall
     -ceiling : Ceiling
     -floor : Floor
-    -oven : Oven
     -pipe : Dryer
     -rope : Dryer
     -oven : Oven
@@ -73,12 +92,16 @@ class Room {
     +visitors[] : Shorty
     --
     + Room (String name, String volume)
+    + Room (String name, String volume, Shorty[])
     ..
     +getName()
     +setName()
     +addVisitor(Shorty shorty)
     +removeVisitor(Shorty shorty)
     +countVisitors() : int
+    +addPipe(String material, String size, int temperature)
+    +addRope(int length, String material, int temperature)
+    +addOven(String material)
     +getRoomFloor()
     +getRoomCeiling()
     +getRoomElements()
@@ -122,6 +145,9 @@ class Floor {
 class Shelve {
     -material : String
     -status : String
+    -number : int
+    -mattress : String
+    -pillow : String
     +people[] : Shorty
     --
     +Shelve(String material, String status)
@@ -178,9 +204,57 @@ class Bulb {
     +getBrightness() : String
 }
 
-Cloth --> Characteristic
+class House {
+    -condition : String
+    -rooms[] : Room
+    +visitors[] : Shorty
+    +getSignboard() : String
+    +setSignboard(String newSignboard)
+    +addVisitor(Shorty shorty)
+    +removeVisitor(Shorty shorty)
+    +countVisitors() : int
+    +addRoom(Room room)
+    +removeRoom(Room room)
+    +countRoom() : int
+}
 
+static class Signboard {
+    -name : String
+    +getName() : String
+    +setName(String newName)
+}
+note left of Signboard
+   Это статический класс
+end note
+
+class NegativeNumberException
+note right of NegativeNumberException
+   Это unchecked исключение
+end note
+
+class TryZeroRoomsException
+note left of TryZeroRoomsException
+   Это checked исключение
+end note
+
+class CorrectName {
+    +Checkname(String newName) : boolean
+}
+note top of CorrectName
+   Это локальный класс
+   используется для проверки имени
+end note
+
+
+
+skinparam groupInheritance 1
+Shorty::Shorty .right.> NegativeNumberException : Throws
+House::removeRoom .left.> TryZeroRoomsException : Throws
+Cloth -up-> Characteristic
 ICook <|.. Shorty
+Room -up-* House
+IWalk <|.. Shorty
+House *-- Signboard
 Room <-- Shorty
 Room *-- Ceiling
 Room *-- Wall
@@ -192,6 +266,8 @@ Wall o-- Bulb
 Room o-- Dryer
 Dryer <|-- Pipe
 Dryer <|-- Rope
+Shorty::setName <-left- CorrectName
+
 
 Cloth --o Shorty
 

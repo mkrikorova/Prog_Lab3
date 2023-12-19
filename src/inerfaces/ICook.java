@@ -1,4 +1,4 @@
-package Inerfaces;
+package inerfaces;
 
 public interface ICook {
     void bake(String product);

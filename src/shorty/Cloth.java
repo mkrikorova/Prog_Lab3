@@ -1,7 +1,7 @@
-package ShortyAndClothers;
+package shorty;
 
-import Inerfaces.IDry;
-import RoomAndAllInside.Dryer;
+import inerfaces.*;
+import room.*;
 
 public class Cloth implements IDry {
     private String type; // вид одежды (белье носок и тп)
@@ -41,16 +41,17 @@ public class Cloth implements IDry {
         if (place.getTemperature() >= 75) {
             this.rateSoak = 0;
             if (this.characteristic != null) {
-                System.out.println(this.characteristic.getTitle() + "  " + this.type + " сохнет");
+                System.out.print(this.characteristic.getTitle() + "  " + this.type + " сохнет ");
             } else {
-                System.out.println(this.type + " сохнет");
+                System.out.print(this.type + " сохнет ");
             }
         } else if (place.getTemperature() >= 0 && place.getTemperature() <= 75) {
             this.rateSoak += (double) 100 / place.getTemperature();
             if (this.characteristic != null) {
-                System.out.println(this.characteristic.getTitle() + "  " + this.type + " станет менее мокрым на " + String.valueOf(place.getTemperature()) + "% больше");
+                System.out.print(this.characteristic.getTitle() + "  " + this.type + " станет менее мокрым на " +
+                        String.valueOf(place.getTemperature()) + "% больше ");
             } else {
-                System.out.println(this.type + " станет менее мокрым на " + String.valueOf(place.getTemperature()) + "% больше");
+                System.out.print(this.type + " станет менее мокрым на " + String.valueOf(place.getTemperature()) + "% больше ");
             }
         }
     }

@@ -1,6 +1,4 @@
-package RoomAndAllInside;
-
-import RoomAndAllInside.Dryer;
+package room;
 
 public class Pipe extends Dryer {
     private String material;

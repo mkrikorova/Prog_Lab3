@@ -1,6 +1,6 @@
-package Inerfaces;
+package inerfaces;
 
-import RoomAndAllInside.Dryer;
+import room.Dryer;
 
 public interface IDry {
     public void wet();

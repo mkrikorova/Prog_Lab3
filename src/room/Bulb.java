@@ -1,4 +1,4 @@
-package RoomAndAllInside;
+package room;
 
 public class Bulb {
     private String brightness;

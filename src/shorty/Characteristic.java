@@ -1,4 +1,4 @@
-package ShortyAndClothers;
+package shorty;
 
 public enum Characteristic {
     SHAPELESS ("бесформенный"),

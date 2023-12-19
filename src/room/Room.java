@@ -1,5 +1,5 @@
-package RoomAndAllInside;
-import ShortyAndClothers.*;
+package room;
+import shorty.*;
 
 import java.util.ArrayList;
 
@@ -40,8 +40,9 @@ public class Room {
         ceiling = new Ceiling(170, "закопченный");
         floor = new Floor("бетонный");
         for (Shorty shorty : nowVisitors) {
-            this.addVisitor(shorty);
-            System.out.println(shorty.getName() + " был в комнате");
+            shorty.setLocation(this);
+            shorty.getLocation();
+            //System.out.println(shorty.getName() + " был в комнате");
         }
 
         //System.out.println("создалась комната " + this.name);
@@ -83,6 +84,20 @@ public class Room {
     public Pipe getRoomPipe() {
         return this.pipe;
     }
+    public Wall getWall(int index) {
+        switch (index) {
+            case (0):
+                return this.wall1;
+            case (1):
+                return this.wall2;
+            case (2):
+                return this.wall3;
+            case (3):
+                return this.wall4;
+            default:
+                return null;
+        }
+    }
     public void getRoomCeiling() {
         System.out.println("потолок был " + this.ceiling.getCeiling());
     }
@@ -92,16 +107,11 @@ public class Room {
         System.out.printf("в " + this.name + " были " + this.oven.getMaterial() + " печь с " + this.pipe.getDryerType() + " труба, ");
         System.out.println("на потолке висела " + this.ceiling.getBulb(0) + " лампочка");}
 
-
-
     public class Wall {
         ArrayList<Shelve> shelves = new ArrayList<Shelve>();
         ArrayList<Bulb> bulbs = new ArrayList<Bulb>();
 
         public Wall() {
-            Bulb bulb1 = new Bulb("погасшая");
-            this.addBulb(bulb1);
-
             Shelve shelve1 = new Shelve("деревянная", "неотесанная");
             this.addShelve(shelve1);
             //System.out.println("создалась стена");
@@ -137,7 +147,7 @@ public class Room {
                 res += ("на " + o.getShelve() + " полка лежали ");
                 ArrayList<Shorty> n = o.getPeople();
                 for (int j = 0; j < n.size(); j++) {
-                    res += n.get(j).getName();
+                    res += (n.get(j).getName() + " ");
                 }
             }
             return res;

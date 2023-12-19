@@ -1,4 +1,4 @@
-package RoomAndAllInside;
+package room;
 
 public class Oven {
     private String material;
